@@ -24,27 +24,21 @@ def load_key():
 
 # This function takes a message and a key, then returns the encrypted message
 def encrypt_message(message: str, key: str) -> str:
-    """
-    Encrypts a message
-    """
+
     encoded_message = message.encode()  
     f = Fernet(key)  
     return f.encrypt(encoded_message)  
 
 # This function takes an encrypted message and a key, then returns the decrypted message
 def decrypt_message(encrypted_message: str, key: str) -> str:
-    """
-    Decrypts an encrypted message
-    """
+
     f = Fernet(key)  
     return f.decrypt(encrypted_message).decode()  
 
 
 # This function takes a file name and a key, reads the file, encrypts its data, then writes the encrypted data back to the file
 def encrypt_file(file_name: str, key: str):
-    """
-    Encrypts a file
-    """
+
     with open(file_name, 'rb') as file:  # Open the file in read-binary mode
         file_data = file.read()  # Read the file's data
 
@@ -57,9 +51,7 @@ def encrypt_file(file_name: str, key: str):
 
 # This function takes a file name and a key, reads the file, decrypts its data, then writes the decrypted data back to the file
 def decrypt_file(file_name: str, key: str):
-    """
-    Decrypts an encrypted file
-    """
+
     with open(file_name, 'rb') as file:  # Open the file in read-binary mode
         encrypted_data = file.read()  # Read the encrypted data from the file
 
@@ -97,10 +89,10 @@ def set_wallpaper():
 
 #This funtion will create a pop up window
 
-root = tk.Tk()
-root.withdraw()  # hide the main window
-
-messagebox.showinfo("Title", "Your Data is mine!!")  # show a popup window with a message
+def show_message():
+    root = tk.Tk()
+    root.withdraw()  # hide the main window
+    messagebox.showinfo("Danger", "Your Data is mine!!")  # show a popup window with a message
 
 
 # The main function that prompts the user to select a mode, then performs the appropriate action
@@ -108,7 +100,7 @@ def main():
     generate_key()  
     key = load_key()  
 
-    # Ask the user to select a mode
+# Ask the user to select a mode
     mode = int(input("Select a mode:\n1. Encrypt a file\n2. Decrypt a file\n3. Encrypt a message\n4. Decrypt a message\n5. Encrypt a folder\n6. Decrypt a folder\n7. Change desktop wallpaper\n8. Show a message\n"))
 
 
@@ -150,5 +142,7 @@ def main():
         show_message()
         print("Message has been displayed.")
        
+if __name__ == "__main__":
+    main()
 
 #End
